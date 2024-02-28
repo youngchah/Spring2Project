@@ -1,0 +1,73 @@
+┌────────────────────────────────────
+	SPRING2 진행 내용
+	
+	개발 시 사용하고 있는 STS는 3.9.15.REALEASE 버전에 해당 하며, 이클립스 e4.16버전에 해당한다.
+	다양한 STS(e_version)버전들이 존재하지만, 우리가 사용하는 JDK1.8버전과 Spring Framework 호환성의
+	문제가 가장 적은 3.9.15버전을 선택해서 사용중
+	
+	1. STS 3.9.15 Tool 설치 후 실행
+	2. workspace 경로 설정 후 STS 진입
+	3. 이클립스 설정 진행
+		> encoding 설정
+		> font 설정
+		> server 설정(우리가 사용하는 tomcat)
+		> java 설정(우리가 사용하는 JDK1.8)
+	4. 스프링 프로젝트 만들기
+		> Spring Legacy Project 생성
+		> 프로젝트명, 패키지 선택 후 진행
+			프로젝트명 : Spring2Project
+			패키지 : kr.or.ddit
+			template : Spring MVC Project
+			
+			*** 여기서 현명한 현명답안!!
+			template이 나오지 않습니다!!!! 도와주세요!!
+			> 걱정하지마세요 현명이가 제안한 방법으로 해결이 가능합니다!
+			> mvc_template.zip 파일 안에 template.xml 파일이 존재합니다.
+			  그 녀석을 .metadata 폴더 안에 plugins폴더 안에 content.core 폴더 안에 넣어주세요!
+			  
+			> 어? 선생님! content.core 폴더가 생성되어 있지 않는데요????
+			  그것도 걱정하지 마세요! 현명한 현명이가 제안한 방법이 있답니다!
+			  제일 먼저 legacy project를 선택해서 진행해주세요! (template을 선택하는 부분까지!)
+			  여기서 content.core 폴더가 생성됩니다!
+			> xml 파일을 넣어놓고, STS를 다시 실행합니다!
+			> 짜잔~ 현명이가 말한대로 template이 잘 나오죠?
+			
+		> Spring2Project 프로젝트를 만들고 모든 폴더 구조를 열어서 확인해주세요.
+		  누락된 파일이 없는지, 구조는 이상하지 않은지 확인!
+		  
+	5. 프로젝트 내 파일 설정
+		> pom.xml 설정
+			> java-version 1.8 설정
+			> springframework 5.3.25 설정
+			> servlet 버전 설정
+				: artifact > javax.servlet-api
+				: version : 3.1.0
+			> maven-plugin내, source 및 target 버전 1.8 설정
+			> 프로젝트 우클릭 > Run As > Maven Clean
+			> 프로젝트 우클릭 > Run As > Maven Build
+				: goals 값 compile 입력 후 Run으로 적용
+			> BUILD SUCCESS 를 확인한다.
+		> web.xml 설정
+			> servlet 버전 2.5에서 3.1 및 스키마 버전 3_1로 설정
+			
+	6. 서버 설정(tomcat)
+		> port : 80
+		> timeout : 120s
+		> module의 contextPath : '/' 설정
+		
+	7. localhost로 home.jsp 페이지 확인 
+				
+				
+		
+		
+		
+		  	
+		
+			
+			
+			
+			
+			
+			
+			
+			
