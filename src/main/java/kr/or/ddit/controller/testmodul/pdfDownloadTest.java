@@ -17,4 +17,12 @@ public class pdfDownloadTest {
 		
 		return "pdf/pdfDownload";
 	}
+	@RequestMapping(value = "/pdfMain", method = RequestMethod.GET)
+	public String pdfMain(Model model) {
+		log.info("pdfMain() 실행..!");
+		
+		return "pdf/pdfMain";
+	}
+	
+	
 }

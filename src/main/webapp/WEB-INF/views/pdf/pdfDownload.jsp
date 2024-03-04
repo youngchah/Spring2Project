@@ -50,7 +50,7 @@
 		</ul>
 	</div>
 	
-	
+	<p> 한글이 깨지냐 안깨지냐 </p>
 
 	<form action="" method="post" id="mainForm">
 		<p>userId : <input type="text" id="userId" value="a001" name="userId"/></p>

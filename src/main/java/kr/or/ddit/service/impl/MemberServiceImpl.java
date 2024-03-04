@@ -34,4 +34,48 @@ public class MemberServiceImpl implements IMemberService {
 		return mapper.list();
 	}
 
+	@Override
+	public CrudMember read(int userNo) {
+		return mapper.read(userNo);
+	}
+
+	@Override
+	public void modify(CrudMember member) {
+		mapper.modify(member);
+		
+		int userNo = member.getUserNo();	// 회원번호 가져오기
+		mapper.deleteAuth(userNo);	// 회원 번호에 해당하는 권한들 모두 지우기
+		
+		List<CrudMemberAuth> authList = member.getAuthList();
+		for(int i = 0; i < authList.size(); i++) {
+			CrudMemberAuth memberAuth = authList.get(i);
+			String auth = memberAuth.getAuth();
+			if(auth == null) {
+				continue;
+			}
+			if(auth.trim().length() == 0) {
+				continue;
+			}
+			
+			memberAuth.setUserNo(userNo);
+			mapper.createAuth(memberAuth);
+		}
+	}
+
+	@Override
+	public void remove(int userNo) {
+		mapper.deleteAuth(userNo);	//자식을 먼저 지워줌
+		mapper.delete(userNo);
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
