@@ -10,5 +10,7 @@ public interface IItemService {
 	public List<Item> list();
 	public Item read(int itemId);
 	public String getPicture(int itemId);
+	public void modify(Item item);
+	public void remove(int itemId);
 
 }

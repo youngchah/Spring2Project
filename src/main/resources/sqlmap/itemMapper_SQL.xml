@@ -32,5 +32,20 @@
  		where item_id = #{itemId}
  	</select>
  	
+ 	<update id="modify" parameterType="item">
+		update item
+		set
+			item_name = #{itemName},
+			price = #{price},
+			description = #{description},
+			picture_url = #{pictureUrl}
+		where item_id = #{itemId}
+	</update>
+	
+	<delete id="remove" parameterType="int">
+		delete from item
+		where item_id = #{itemId}
+	</delete>
+ 	
  	
  </mapper>

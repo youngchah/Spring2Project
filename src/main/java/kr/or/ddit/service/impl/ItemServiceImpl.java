@@ -36,4 +36,15 @@ public class ItemServiceImpl implements IItemService {
 		return mapper.getPicture(itemId);
 	}
 
+	@Override
+	public void modify(Item item) {
+		mapper.modify(item);
+		
+	}
+
+	@Override
+	public void remove(int itemId) {
+		mapper.remove(itemId);
+	}
+
 }
