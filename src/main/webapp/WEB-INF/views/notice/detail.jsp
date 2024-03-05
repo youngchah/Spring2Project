@@ -48,10 +48,13 @@
 							</ul>
 						</div>
 						<div class="card-footer">
-							<button type="submit" class="btn btn-secondary">목록</button>
-							<button type="submit" class="btn btn-dark">수정</button>
-							<button type="submit" class="btn btn-danger">삭제</button>
+							<button type="button" class="btn btn-secondary" id="listBtn">목록</button>
+							<button type="button" class="btn btn-dark" id="updateBtn">수정</button>
+							<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
 						</div>
+					</form>
+					<form id="delForm" action="/notice/delete.do" method="post">
+						<input type="hidden" name="boNo" value="${notice.boNo }"/>
 					</form>
 				</div>
 			</div>
@@ -59,3 +62,42 @@
 		</div>
 	</div>
 </section>
+<script>
+$(function(){
+	var delForm = $('#delForm');
+	var listBtn = $('#listBtn');
+	var updateBtn = $('#updateBtn');
+	var deleteBtn = $('#deleteBtn');
+	
+	listBtn.on('click', function(){
+		location.href = "/notice/list.do";
+		
+	});
+	updateBtn.on('click', function(){
+		delForm.attr('method', 'get');
+		delForm.attr('action', '/notice/update.do');
+		delForm.submit();
+		
+	});
+	deleteBtn.on('click', function(){
+		if(confirm('정말로 삭제하시겠습니까?')){
+			delForm.submit();
+		}
+	});
+	
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

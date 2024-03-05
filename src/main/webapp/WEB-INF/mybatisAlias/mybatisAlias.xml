@@ -19,6 +19,8 @@
 		<typeAlias type="kr.or.ddit.vo.crud.CrudMember" alias="crudMember"/>
 		<typeAlias type="kr.or.ddit.vo.crud.CrudMemberAuth" alias="crudMemberAuth"/>
 		<typeAlias type="kr.or.ddit.vo.crud.NoticeVO" alias="noticeVO"/>
+		<typeAlias type="kr.or.ddit.vo.PaginationInfoVO" alias="pagingVO"/>
+		<typeAlias type="kr.or.ddit.vo.Item" alias="item"/>
 		
 	</typeAliases>
 	
