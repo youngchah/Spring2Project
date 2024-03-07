@@ -29,7 +29,7 @@
 					<h3 class="card-title">공지사항 ${name }</h3>
 					<div class="card-tools"></div>
 				</div>
-				<form method="post" action="/notice/insert.do" id="noticeForm">
+				<form method="post" action="/notice/insert.do" id="noticeForm" enctype="multipart/form-data">
 					<c:if test="${status eq 'u' }">
 						<input type="hidden" name="boNo" value="${notice.boNo }"/>
 					</c:if>
@@ -42,14 +42,13 @@
 							<label for="boContent">내용을 입력해주세요</label>
 							<textarea id="boContent" name="boContent" class="form-control" rows="14">${notice.boContent }</textarea>
 						</div>
-<!-- 						<div class="form-group"> -->
-<!-- 							<div class="custom-file"> -->
+						<div class="form-group">
+							<div class="custom-file">
 	
-<!-- 								<input type="file" class="custom-file-input" id="customFile" -->
-<!-- 									multiple="multiple"> <label class="custom-file-label" -->
-<!-- 									for="customFile">파일을 선택해주세요</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
+								<input type="file" class="custom-file-input" id="boFile" name="boFile" multiple="multiple"> 
+								<label class="custom-file-label" for="customFile">파일을 선택해주세요</label>
+							</div>
+						</div>
 					</div>
 					
 					<c:if test="${status eq 'u' }">
@@ -92,8 +91,8 @@
 										src="${pageContext.request.contextPath }/resources/dist/img/photo2.png" alt="Attachment"></span>
 		
 									<div class="mailbox-attachment-info">
-										<a href="#" class="mailbox-attachment-name"><i
-											class="fas fa-camera"></i> photo2.png</a> <span
+										<a href="#" class="mailbox-attachment-name">
+										<i class="fas fa-camera"></i> photo2.png</a> <span
 											class="mailbox-attachment-size clearfix mt-1"> <span>1.9
 												MB</span> <a href="#" class="btn btn-default btn-sm float-right"><i
 												class="fas fa-times"></i></a>
@@ -124,7 +123,9 @@
 </section>
 <script type="text/javascript">
 $(function(){
-	CKEDITOR.replace("boContent");
+	CKEDITOR.replace("boContent", {
+		filebrowserUploadUrl: '/imageUpload.do'
+	});
 	
 	var noticeForm = $("#noticeForm");
 	var listBtn = $("#listBtn");

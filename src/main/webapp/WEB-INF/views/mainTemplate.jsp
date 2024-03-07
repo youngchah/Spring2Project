@@ -35,8 +35,14 @@
 	
 		<aside class="control-sidebar control-sidebar-dark"></aside>
 	</div>
-
+	
 	<script src="${pageContext.request.contextPath }/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/dist/js/adminlte.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	bsCustomFileInput.init();
+});
+</script>
 </body>
 </html>

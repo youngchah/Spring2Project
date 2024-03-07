@@ -3,6 +3,7 @@ package kr.or.ddit.mapper;
 import java.util.List;
 
 import kr.or.ddit.vo.PaginationInfoVO;
+import kr.or.ddit.vo.crud.NoticeFileVO;
 import kr.or.ddit.vo.crud.NoticeVO;
 
 public interface INoticeMapper {
@@ -14,5 +15,6 @@ public interface INoticeMapper {
 	public int deleteNotice(int boNo);
 	public int selectNoticeCount(PaginationInfoVO<NoticeVO> pagingVO);
 	public List<NoticeVO> selectNoticeList(PaginationInfoVO<NoticeVO> pagingVO);
+	public void insertNoticeFile(NoticeFileVO noticeFileVO);
 
 }
