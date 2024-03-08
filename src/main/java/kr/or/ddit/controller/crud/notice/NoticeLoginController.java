@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -124,6 +125,31 @@ public class NoticeLoginController {
 			}
 		}
 		return goPage;
+	}
+	
+	@RequestMapping(value="/forget.do", method = RequestMethod.GET)
+	public String loginForgetIdAndPw(Model model) {
+		model.addAttribute("bodyText", "login-page");
+		return "conn/forget";
+	}
+	
+	// 아이디 찾기 기능 요청(비동기)
+	@RequestMapping(value="/idForget.do", method = RequestMethod.POST)
+	public ResponseEntity<String> idForgetProcess(@RequestBody NoticeMemberVO member) {
+		log.info("넘겨받은 이메일: " + member.getMemEmail());
+		log.info("넘겨받은 이름: " + member.getMemName());
+		String result = noticeService.idForgetProcess(member);
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
+
+	// 비밀번호 찾기 기능 요청(비동기)
+	@RequestMapping(value="/pwForget.do", method = RequestMethod.POST)
+	public ResponseEntity<String> pwForgetProcess(@RequestBody NoticeMemberVO member) {
+		log.info("넘겨받은 아이디: " + member.getMemId());
+		log.info("넘겨받은 이메일 : " + member.getMemEmail());
+		log.info("넘겨받은 이름: " + member.getMemName());
+		String result = noticeService.pwForgetProcess(member);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 }
 

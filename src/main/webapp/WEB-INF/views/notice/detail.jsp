@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -29,23 +28,33 @@
 					<form id="quickForm" novalidate="novalidate">
 						<div class="card-body">${notice.boContent }</div>
 						<div class="card-footer bg-white">
-							<ul
-								class="mailbox-attachments d-flex align-items-stretch clearfix">
-								<li><span class="mailbox-attachment-icon"> <i
-										class="far fa-file-pdf"></i>
-								</span>
-									<div class="mailbox-attachment-info">
-										<a href="#" class="mailbox-attachment-name"> <i
-											class="fas fa-paperclip"></i> 파일명
-										</a> <span class="mailbox-attachment-size clearfix mt-1"> <span>파일
-												Fancy사이즈 KB</span> <a href="다운로드 url"> <span
-												class="btn btn-default btn-sm float-right"> <i
-													class="fas fa-download"></i>
+							<c:if test="${not empty notice.noticeFileList }">
+								<ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+									<c:forEach items="${notice.noticeFileList }" var="noticeFile">
+										<li>
+											<span class="mailbox-attachment-icon"> 
+											<i class="far fa-file-pdf"></i>
 											</span>
-										</a>
-										</span>
-									</div></li>
-							</ul>
+											<div class="mailbox-attachment-info">
+												<a href="#" class="mailbox-attachment-name"> 
+													<i class="fas fa-paperclip"></i> ${noticeFile.fileName }
+												</a> 
+													<span class="mailbox-attachment-size clearfix mt-1"> 
+														<span>${noticeFile.fileFancysize }</span> 
+														<c:url value="/notice/download.do" var="downloadURL">
+															<c:param name="fileNo" value="${noticeFile.fileNo }"/>
+														</c:url>
+														<a href="${downloadURL }"> 
+															<span class="btn btn-default btn-sm float-right"> 
+																<i class="fas fa-download"></i>
+														</span>
+													</a>
+													</span>
+											</div>
+										</li>
+									</c:forEach>
+								</ul>
+							</c:if>
 						</div>
 						<div class="card-footer">
 							<button type="button" class="btn btn-secondary" id="listBtn">목록</button>
