@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 
 		root-context.xml : 스프링 설정을 위한 파일
@@ -52,6 +55,12 @@
 	 <bean id="uploadPath" class="java.lang.String">
 	 	<constructor-arg value="E:\D_setting\A_TeachingMaterial\01_JSP_SPRING\02.SPRING2\workspace_spring2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Spring2Project\resources\upload"/>
 	 </bean>
+	 
+	 <!-- 스프링 AOP 활성화 -->
+	 <aop:aspectj-autoproxy/>
+	 <context:component-scan base-package="kr.or.ddit.aop"></context:component-scan>
+	 <context:component-scan base-package="kr.or.ddit.service"></context:component-scan>
+	 
 </beans>
 
 

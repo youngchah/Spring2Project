@@ -45,7 +45,7 @@
 <!-- 	 </beans:bean> -->
 	
 	
-	<context:component-scan base-package="kr.or.ddit" />
+	<context:component-scan base-package="kr.or.ddit.controller" />
 	
 	
 	
