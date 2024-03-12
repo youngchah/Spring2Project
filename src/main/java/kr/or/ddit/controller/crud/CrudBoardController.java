@@ -64,14 +64,14 @@ public class CrudBoardController {
 	}
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public String crudRead(int boardNo, Model model) {
+	public String crudRead(int boardNo, Model model) throws Exception {
 		Board board = service.read(boardNo);
 		model.addAttribute("board", board);
 		return "crud/read";
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String crudModifyForm(int boardNo, Model model) {
+	public String crudModifyForm(int boardNo, Model model) throws Exception {
 		Board board = service.read(boardNo);
 		model.addAttribute("board", board);
 		model.addAttribute("status", "u");	//수정을 진행중이라는 flag값

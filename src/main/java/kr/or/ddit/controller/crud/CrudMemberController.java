@@ -1,5 +1,6 @@
 package kr.or.ddit.controller.crud;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,7 +26,7 @@ public class CrudMemberController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String crudMemberRegister(CrudMember member, Model model) {
+	public String crudMemberRegister(CrudMember member, Model model) throws IOException {
 		service.register(member);
 		model.addAttribute("msg", "등록이 완료되었습니다!");
 		return "crud/member/success";

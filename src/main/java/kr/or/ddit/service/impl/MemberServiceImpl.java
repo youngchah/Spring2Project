@@ -1,10 +1,12 @@
 package kr.or.ddit.service.impl;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.mapper.IMemberMapper;
 import kr.or.ddit.service.IMemberService;
@@ -17,13 +19,19 @@ public class MemberServiceImpl implements IMemberService {
    @Inject
    private IMemberMapper mapper;
    
+   @Transactional(rollbackFor = {IOException.class, NullPointerException.class})
    @Override
-   public void register(CrudMember member) {
+   public void register(CrudMember member) throws IOException {
       mapper.create(member);
       
       CrudMemberAuth memberAuth = new CrudMemberAuth();
       memberAuth.setUserNo(member.getUserNo());
       memberAuth.setAuth("ROLE_USER");
+      
+      if(true) {
+    	  throw new IOException();
+      }
+      
       
       mapper.createAuth(memberAuth);
       
