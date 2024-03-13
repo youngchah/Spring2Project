@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-
 	<!-- Appenders -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
@@ -12,29 +11,57 @@
 	
 	<!-- Application Loggers -->
 	<logger name="kr.or.ddit">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
-
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
-
+	
+	<logger name="_org.springframework.web.servlet.HandlerMapping.Mappings">
+		<level value="OFF" />
+	</logger>
+	
+	<!-- LOG4JDBC 로그 설정 -->
+	<logger name="jdbc.sqlonly">
+		<level value="OFF" />
+	</logger>
+	<logger name="jdbc.sqltiming">
+		<level value="INFO" />
+	</logger>
+	<logger name="jdbc.resultsettable">
+		<level value="INFO" />
+	</logger>
+	<logger name="jdbc.audit">
+		<level value="OFF" />
+	</logger>
+	<logger name="jdbc.resultset">
+		<level value="OFF" />
+	</logger>
+	<logger name="jdbc.connection">
+		<level value="OFF" />
+	</logger>
+	
+	<!-- TILES 로그 설정 -->
+	<logger name="org.apache.commons.digester.Digester" additivity="false">
+  		<level value="OFF" />
+	</logger>
+	
 	<!-- Root Logger -->
 	<root>
-		<priority value="debug" />
+		<priority value="warn" />
 		<appender-ref ref="console" />
 	</root>
 	
