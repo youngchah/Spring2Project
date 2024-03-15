@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.ServiceResult;
 import kr.or.ddit.service.INoticeService;
+import kr.or.ddit.vo.CustomUser;
 import kr.or.ddit.vo.crud.NoticeMemberVO;
 import kr.or.ddit.vo.crud.NoticeVO;
 
@@ -58,10 +60,14 @@ public class NoticeInsertController {
 			model.addAttribute("noticeVO", noticeVO);
 			goPage = "notice/form";
 		}else {
+			// HttpServletRequest 방법으로 로그인 처리 후 세션정보에서 얻어온 회원정보를 추가하기 위한 준비
+//			HttpSession session = req.getSession();
+//			NoticeMemberVO memberVO = (NoticeMemberVO)session.getAttribute("SessionInfo");
 			
-			HttpSession session = req.getSession();
-			NoticeMemberVO memberVO = (NoticeMemberVO)session.getAttribute("SessionInfo");
+			CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			NoticeMemberVO memberVO = user.getMember();
 			
+			// [스프링 시큐리티] 회원 ID를 스프링 시큐리티 UserDetails 정보에서 가져오기 
 			if(memberVO != null) {	// 세션에 회원 정보가 있다면, 공지사항 작성자를 회원 아이디로 설정하고 등록을 진행합니다.
 				noticeVO.setBoWriter(memberVO.getMemId());
 				ServiceResult result = noticeService.insertNotice(req, noticeVO);

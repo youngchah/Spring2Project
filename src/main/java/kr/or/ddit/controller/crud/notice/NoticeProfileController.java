@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.ServiceResult;
 import kr.or.ddit.service.INoticeService;
+import kr.or.ddit.vo.CustomUser;
 import kr.or.ddit.vo.crud.NoticeMemberVO;
 
 @Controller
@@ -28,14 +30,16 @@ public class NoticeProfileController {
 			) {
 		String goPage = "";
 		
-		NoticeMemberVO sessionMember = (NoticeMemberVO) session.getAttribute("SessionInfo");
+//		NoticeMemberVO sessionMember = (NoticeMemberVO) session.getAttribute("SessionInfo");
+//		
+//		if(sessionMember == null) {
+//			ra.addFlashAttribute("message", "로그인 후 이용 가능합니다!");
+//			return "redirect:/notice/login.do";
+//		}
 		
-		if(sessionMember == null) {
-			ra.addFlashAttribute("message", "로그인 후 이용 가능합니다!");
-			return "redirect:/notice/login.do";
-		}
-		
-		NoticeMemberVO member = noticeService.selectMember(sessionMember.getMemId());
+		CustomUser user = (CustomUser) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+		NoticeMemberVO member = noticeService.selectMember(user.getMember().getMemId());
 		
 		if(member != null) {
 			model.addAttribute("member", member);

@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +32,9 @@ public class NoticeServiceImpl implements INoticeService {
 	
 	@Inject
 	private IProfileMapper profileMapper;
+	
+	@Inject
+	private PasswordEncoder pe;
 	
 	@Override
 	public ServiceResult insertNotice(HttpServletRequest req,NoticeVO noticeVO) {
@@ -192,12 +196,15 @@ public class NoticeServiceImpl implements INoticeService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 	
-			// 해당 위치에 파일 복사
 			// 파일 복사가 일어난 파일의 위치로 접근하기 위한 URI 설정
 			proFileImg = "/resources/profile/" + fileName;
 		}
 		
 		memberVO.setMemProfileimg(proFileImg);
+		
+		// 암호화 된 비밀번호 셋팅 
+		// 스프링 시큐리티 적용 시, 비밀번호 암호화 설정 
+		memberVO.setMemPw(pe.encode(memberVO.getMemPw()));
 		
 		int status = loginMapper.signup(memberVO);
 		if(status > 0) {

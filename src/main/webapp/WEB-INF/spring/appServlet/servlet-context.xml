@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -46,30 +48,32 @@
 	
 	
 	<context:component-scan base-package="kr.or.ddit.controller" />
-	
+	<context:component-scan base-package="kr.or.ddit.security" />
+	<security:global-method-security pre-post-annotations="enabled"
+		secured-annotations="enabled"/>
 	<!-- 
 		인터셉터 설정
 		- LoginInterceptor 클래스를 빈으로 정의한다.
 		설정한 클래스는 해당 위치에 존재해야 한다 (인터셉터 등록 시 패키지 구조에 맞는 위치로 있어야함)
 	 -->
-	<beans:bean id="loginInterceptor" 
-		class="kr.or.ddit.controller.intercept.LoginInterceptor"></beans:bean>
-	<interceptors>
-		<interceptor>
-			<mapping path="/intercept/login"/>
-			<beans:ref bean="loginInterceptor"/>
-		</interceptor>
-	</interceptors>
+<!-- 	<beans:bean id="loginInterceptor"  -->
+<!-- 		class="kr.or.ddit.controller.intercept.LoginInterceptor"></beans:bean> -->
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/intercept/login"/> -->
+<!-- 			<beans:ref bean="loginInterceptor"/> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
 	
-	<beans:bean id="accessLoggingInterceptor"
-		class="kr.or.ddit.controller.intercept.AccessLoggingInterceptor"></beans:bean>
-	<interceptors>
-		<interceptor>
-			<mapping path="/**"/>
-			<exclude-mapping path="/resources/**"/>
-			<beans:ref bean="accessLoggingInterceptor"/>
-		</interceptor>
-	</interceptors>
+<!-- 	<beans:bean id="accessLoggingInterceptor" -->
+<!-- 		class="kr.or.ddit.controller.intercept.AccessLoggingInterceptor"></beans:bean> -->
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/**"/> -->
+<!-- 			<exclude-mapping path="/resources/**"/> -->
+<!-- 			<beans:ref bean="accessLoggingInterceptor"/> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
 	
 	
 </beans:beans>

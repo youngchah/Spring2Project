@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -41,7 +42,7 @@
 												</a> 
 													<span class="mailbox-attachment-size clearfix mt-1"> 
 														<span>${noticeFile.fileFancysize }</span> 
-														<c:url value="/notice/download.do" var="downloadURL">
+														<c:url value="/notice/download.do?${_csrf.parameterName}=${_csrf.token}" var="downloadURL">
 															<c:param name="fileNo" value="${noticeFile.fileNo }"/>
 														</c:url>
 														<a href="${downloadURL }"> 
@@ -64,6 +65,7 @@
 					</form>
 					<form id="delForm" action="/notice/delete.do" method="post">
 						<input type="hidden" name="boNo" value="${notice.boNo }"/>
+						<sec:csrfInput/>
 					</form>
 				</div>
 			</div>

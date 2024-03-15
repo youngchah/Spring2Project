@@ -10,5 +10,6 @@ public interface ILoginMapper {
 	// 아이디 비밀번호 찾기 
 	public String idForgetProcess(NoticeMemberVO member);
 	public String pwForgetProcess(NoticeMemberVO member);
+	public NoticeMemberVO readByUserId(String username);
 
 }
